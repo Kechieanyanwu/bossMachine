@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
+
+
+
 
 module.exports = app;
 
@@ -12,13 +12,17 @@ module.exports = app;
 const PORT = process.env.PORT || 4001;
 
 //Nkechi: Add morgan for logging HTTP requests to console
+const morgan = require("morgan");
 app.use(morgan("tiny"));
 
 // Add middleware for handling CORS requests from index.html
+const cors = require("cors");
 app.use(cors());
 
 // Add middware for parsing request bodies here:
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: true})); //to check why i need to have urlencoded
 
 // Mount your existing apiRouter below at the '/api' path.
 const apiRouter = require('./server/api');
