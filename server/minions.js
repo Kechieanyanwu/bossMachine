@@ -18,6 +18,7 @@ minionRouter.param("minionId", (req, res, next, id) => {
     const minion = validateMinionId(minionId);
     console.log(`The response object is ${JSON.stringify(minion)}`); //debug
     if (minion) {
+        req.minion = minion; //just added to check if causes error
         req.id = minionId;
         console.log("You have reached the if minion section"); //debug
         next();
@@ -33,7 +34,7 @@ minionRouter.param("minionId", (req, res, next, id) => {
 // GET /api/minions to get an array of all minions. - function getAllFromDatabase
 minionRouter.get("/", (req, res, next) => {
     console.log("You have reached the Get All Minions endpoint"); //testing 
-    res.status(200).send(getAllFromDatabase("minions"))
+    res.send(getAllFromDatabase("minions"))
 });
 
 
@@ -60,8 +61,27 @@ minionRouter.get("/:minionId", (req, res, next) => {
 });
 
 // PUT /api/minions/:minionId to update a single minion by id. - Sends updated resource in req body - function updateInstanceInDatabase
+minionRouter.put("/:minionId", (req, res, next) => {
+    const updatedMinion = updateInstanceInDatabase("minions", req.body);
+    if (updatedMinion) {
+        res.send(updatedMinion);
+    } else {
+        res.status(400).send();
+    }
+});
+
+
 // DELETE /api/minions/:minionId to delete a single minion by id. - function deleteFromDatabasebyId
+minionRouter.delete("/:minionId", (req, res, next) => {
+    const bool = deleteFromDatabasebyId("minions", req.id);
+    if (bool) {
+        res.status(204).send();
+    } else {
+        res.status(400).send();
+    }
+})
 
 
 
 module.exports = minionRouter;
+
