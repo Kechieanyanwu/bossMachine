@@ -263,6 +263,12 @@ const deleteAllFromDatabase = (modelType) => {
   return model.data;
 }
 
+const validateMinionId = (id) => {
+  console.log(db.allMinions.data);
+  return db.allMinions.data.find((minion) => minion.id === id);
+};
+
+
 module.exports = {
   createMeeting,
   getAllFromDatabase,
@@ -271,4 +277,5 @@ module.exports = {
   updateInstanceInDatabase,
   deleteFromDatabasebyId,
   deleteAllFromDatabase,
+  validateMinionId,
 };
