@@ -85,3 +85,9 @@ minionRouter.delete("/:minionId", (req, res, next) => {
 
 module.exports = minionRouter;
 
+// Schemas
+    // Minion:
+        // id: string
+        // name: string
+        // title: string
+        // salary: number
