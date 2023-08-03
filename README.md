@@ -6,9 +6,10 @@ This project is from Codecademy's backend development path.
 
 Steps for running:
 1. Navigate to the project directory in your code editor
-2. Run "npm run start" or "nodemon server.js"
-3. Open "index.html" in your web browser, preferably Google Chrome
-4. Play around with the site, cancel all your meetings, manage your minions, and think of money-making schemes!
+2. Run "npm install" in your terminal to download the dependencies
+3. Run "npm run start" or "nodemon server.js"
+4. Open "index.html" in your web browser, preferably Google Chrome
+5. Play around with the site, cancel all your meetings, manage your minions, and think of money-making schemes!
 
 Project Status: 
 Satisfactorily completed. I will come back to this if I need to practice modifying the front end. This project helped me flex my RESTful API muscles. I also got to practice building subroutes.
