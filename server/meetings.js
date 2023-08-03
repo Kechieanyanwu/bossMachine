@@ -12,19 +12,20 @@ const {
 
 
 
-// GET /api/meetings to get an array of all meetings. - function getAllFromDatabase
+// GET /api/meetings to get an array of all meetings.
 meetingsRouter.get("/", (req, res, next) => {
     console.log("You have reached the Get All Meetings endpoint"); //testing 
     res.send(getAllFromDatabase("meetings"));
 })
 
-// POST /api/meetings to create a new meeting and save it to the database. - Server automatically generates meetings using CreateMeeting from db.js
+// POST /api/meetings to create a new meeting and save it to the database. 
+// Server automatically generates meetings using CreateMeeting from db.js
 meetingsRouter.post("/", (req, res, next) => {
     const newMeeting = createMeeting();
     res.status(201).send(newMeeting); 
 })
 
-// DELETE /api/meetings to delete all meetings from the database. - function deleteAllFromDatabase
+// DELETE /api/meetings to delete all meetings from the database.
 meetingsRouter.delete("/", (req, res, next) => {
     const data = deleteAllFromDatabase("meetings");
     if (JSON.stringify(data) === JSON.stringify([])) {
@@ -33,5 +34,6 @@ meetingsRouter.delete("/", (req, res, next) => {
         res.status(400).send();
     }
 })
+
 
 module.exports = meetingsRouter;

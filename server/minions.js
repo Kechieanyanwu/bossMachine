@@ -1,5 +1,6 @@
 const express = require('express');
 const minionRouter = express.Router();
+const workRouter = require("./work");
 const {
     createMeeting,
     getAllFromDatabase,
@@ -12,55 +13,49 @@ const {
   } = require("./db");
 
 
-minionRouter.param("minionId", (req, res, next, id) => {
+
+minionRouter.param("minionId", (req, res, next, id) => { //Change this to just use get from db by id
     const minionId = id;
-    console.log(`MinionId: ${minionId} of type ${typeof(minionId)}`); //debug
     const minion = validateMinionId(minionId);
-    console.log(`The response object is ${JSON.stringify(minion)}`); //debug
     if (minion) {
-        req.minion = minion; //just added to check if causes error
+        req.minion = minion; 
         req.id = minionId;
-        console.log("You have reached the if minion section"); //debug
+        console.log("Minion ID validated") //test for work routes to see if it works
         next();
     } else {
-        const err = new Error("Param error Minion Id invalid"); //debug take out param error
+        const err = new Error("Minion Id invalid"); 
         err.status = 400;
         next(err);
     }
 })  
 
+minionRouter.use("/:minionId/work", workRouter);
 
 
-// GET /api/minions to get an array of all minions. - function getAllFromDatabase
+// GET /api/minions to get an array of all minions. 
 minionRouter.get("/", (req, res, next) => {
-    console.log("You have reached the Get All Minions endpoint"); //testing 
     res.send(getAllFromDatabase("minions"))
 });
 
 
-// POST /api/minions to create a new minion and save it to the database. - Sends new resource in req body - function addToDatabase 
-minionRouter.post("/", (req, res, next) => { 
-    try{
-        console.log(`The request body is ${JSON.stringify(req.body)}`); //debug
-        const newMinion = addToDatabase("minions", req.body);
-        console.log(`The response is ${JSON.stringify(newMinion)}`) //debug
+// POST /api/minions to create a new minion and save it to the database. 
+minionRouter.post("/", (req, res, next) => {
+    const newMinion = addToDatabase("minions", req.body);
+    if (newMinion) {
         res.status(201).send(newMinion);
-
-    } catch(err) {
-        err.status = 400; //bad request because invalid minion syntax
-        next(err) //to include error handler
+    } else {
+        res.status(400).send();
     }
 })
 
-
-// GET /api/minions/:minionId to get a single minion by id. - function getFromDatabaseById
+// GET /api/minions/:minionId to get a single minion by id.
 minionRouter.get("/:minionId", (req, res, next) => {
-    console.log("You have reached the get by minion id router, with req.id of " + req.id); //debug
     const minion = getFromDatabaseById("minions", req.id);
+    console.log("test");
     res.status(200).send(minion);
 });
 
-// PUT /api/minions/:minionId to update a single minion by id. - Sends updated resource in req body - function updateInstanceInDatabase
+// PUT /api/minions/:minionId to update a single minion by id. 
 minionRouter.put("/:minionId", (req, res, next) => {
     const updatedMinion = updateInstanceInDatabase("minions", req.body);
     if (updatedMinion) {
@@ -70,24 +65,21 @@ minionRouter.put("/:minionId", (req, res, next) => {
     }
 });
 
-
-// DELETE /api/minions/:minionId to delete a single minion by id. - function deleteFromDatabasebyId
+// DELETE /api/minions/:minionId to delete a single minion by id. 
 minionRouter.delete("/:minionId", (req, res, next) => {
-    const bool = deleteFromDatabasebyId("minions", req.id);
-    if (bool) {
+    const deleted = deleteFromDatabasebyId("minions", req.id);
+    if (deleted) {
         res.status(204).send();
     } else {
         res.status(400).send();
     }
 })
 
+const errorHandler = (err, req, res, next) => {
+    res.status(err.status).send(err.message);
+  }
+  
+minionRouter.use(errorHandler);
 
 
 module.exports = minionRouter;
-
-// Schemas
-    // Minion:
-        // id: string
-        // name: string
-        // title: string
-        // salary: number
