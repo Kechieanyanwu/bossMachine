@@ -12,4 +12,8 @@ Steps for running:
 5. Play around with the site, cancel all your meetings, manage your minions, and think of money-making schemes!
 
 Project Status: 
-Satisfactorily completed. I will come back to this if I need to practice modifying the front end. This project helped me flex my RESTful API muscles. I also got to practice building subroutes.
+Satisfactorily completed with all tests passing. 
+
+I will come back to this if I need to practice modifying the front end, or if I want to practice tightening some of the logic. 
+
+This project helped me flex my RESTful API muscles. I also got to practice building subroutes.

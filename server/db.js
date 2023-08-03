@@ -264,7 +264,6 @@ const deleteAllFromDatabase = (modelType) => {
 }
 
 const validateMinionId = (id) => { //could move this to minion file and refactor 
-  console.log(db.allMinions.data);
   return db.allMinions.data.find((minion) => minion.id === id);
 };
 

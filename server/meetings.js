@@ -21,6 +21,7 @@ meetingsRouter.get("/", (req, res, next) => {
 // Server automatically generates meetings using CreateMeeting from db.js
 meetingsRouter.post("/", (req, res, next) => {
     const newMeeting = createMeeting();
+    addToDatabase("meetings", newMeeting);
     res.status(201).send(newMeeting); 
 })
 

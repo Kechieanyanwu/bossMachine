@@ -8,23 +8,31 @@ const {
     updateInstanceInDatabase,
     deleteFromDatabasebyId,
     deleteAllFromDatabase,
+    validateMinionId,
   } = require("./db");
 
 
-// validate work ID
+
 workRouter.param("workId", (req, res, next, workId) => {
-    const work = getFromDatabaseById("work", workId);
-    if (work) {
-        req.work = work;
-        req.workId = workId;
-        next();
+
+    console.log(req.id);
+    const minionId = req.body.minionId || req.id;
+    const minion = validateMinionId(minionId);
+    if (minion){
+        const work = getFromDatabaseById("work", workId);
+        if (work) {
+            req.work = work;
+            req.workId = workId;
+            next();
+        } else {
+            const err = new Error("Invalid Id");
+            err.status = 400;
+            next(err);
+            }
     } else {
-        const err = new Error("Invalid Id");
-        err.status = 404;
-        next(err);
+        res.status(400).send("Invalid Minion ID"); //remove pt 2
     }
 })
-
 
 // GET /api/minions/:minionId/work to get an array of all work for the specified minion.
 workRouter.get("/", (req, res, next) => {
