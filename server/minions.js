@@ -20,11 +20,10 @@ minionRouter.param("minionId", (req, res, next, id) => { //Change this to just u
     if (minion) {
         req.minion = minion; 
         req.id = minionId;
-        console.log("Minion ID validated") //test for work routes to see if it works
         next();
     } else {
         const err = new Error("Minion Id invalid"); 
-        err.status = 400;
+        err.status = 404;
         next(err);
     }
 })  

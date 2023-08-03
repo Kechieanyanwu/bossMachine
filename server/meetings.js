@@ -14,7 +14,6 @@ const {
 
 // GET /api/meetings to get an array of all meetings.
 meetingsRouter.get("/", (req, res, next) => {
-    console.log("You have reached the Get All Meetings endpoint"); //testing 
     res.send(getAllFromDatabase("meetings"));
 })
 
