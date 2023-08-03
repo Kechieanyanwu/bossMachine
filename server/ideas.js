@@ -20,7 +20,7 @@ ideasRouter.param("ideaId", (req, res, next, id) => {
     next();
   } else {
     const err = new Error("Invalid Idea ID");
-    err.status = 400;
+    err.status = 404;
     next(err); 
   }
 });
@@ -32,15 +32,24 @@ ideasRouter.get("/", (req, res, next) => {
 })
 
 // POST /api/ideas to create a new idea and save it to the database.
-ideasRouter.post("/", (req, res, next) => {
-  const idea = checkMillionDollarIdea(req.body); //check where else is used
-  if (idea) {
-    const savedIdea = addToDatabase("ideas", idea); 
+ideasRouter.post("/", checkMillionDollarIdea, (req, res, next) => {
+    const savedIdea = addToDatabase("ideas", req.idea); 
     res.status(201).send(savedIdea);
-  } else {
-    res.status(400).send()
-  }
 });
+
+
+// // POST /api/ideas to create a new idea and save it to the database.
+// ideasRouter.post("/", (req, res, next) => {
+//   const idea = checkMillionDollarIdea(req.body); //check where else is used
+//   if (idea) {
+//     const savedIdea = addToDatabase("ideas", idea); 
+//     res.status(201).send(savedIdea);
+//   } else {
+//     res.status(400).send()
+//   }
+// });
+
+
     
 // GET /api/ideas/:ideaId to get a single idea by id.
 ideasRouter.get("/:ideaId", (req, res, next) => {
@@ -48,9 +57,8 @@ ideasRouter.get("/:ideaId", (req, res, next) => {
 });
   
 // PUT /api/ideas/:ideaId to update a single idea by id. 
-ideasRouter.put("/:ideaId", (req, res, next) => {
-  const idea = checkMillionDollarIdea(req.body); //check where else is used
-  updatedIdea = updateInstanceInDatabase("ideas", idea);
+ideasRouter.put("/:ideaId", checkMillionDollarIdea, (req, res, next) => {
+  updatedIdea = updateInstanceInDatabase("ideas", req.idea);
   res.status(200).send(updatedIdea);
 });
     

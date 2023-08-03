@@ -17,7 +17,6 @@ workRouter.param("workId", (req, res, next, workId) => {
     if (work) {
         req.work = work;
         req.workId = workId;
-        console.log("Work Id validated"); //debug
         next();
     } else {
         const err = new Error("Invalid Id");
@@ -30,12 +29,9 @@ workRouter.param("workId", (req, res, next, workId) => {
 // GET /api/minions/:minionId/work to get an array of all work for the specified minion.
 workRouter.get("/", (req, res, next) => {
     const allWork = getAllFromDatabase("work");
-    console.log(allWork); //debug
     let response = []
     for (work in allWork) {
-        console.log(`Minion id is ${allWork[work].minionId} and reqId is ${req.id}`) //debug
         if (allWork[work].minionId === req.id){
-            console.log(allWork[work]); //debug
             response.push(allWork[work]);
         }
     }
