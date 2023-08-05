@@ -75,7 +75,7 @@ ideasRouter.delete("/:ideaId", (req, res, next) => { //need to add button for de
 
 const errorHandler = (err, req, res, next) => {
   res.status(err.status).send(err.message);
-}
+};
 
 ideasRouter.use(errorHandler);
 
