@@ -10,6 +10,7 @@ Steps for running:
 3. Run "npm run start" or "nodemon server.js"
 4. Open "index.html" in your web browser, preferably Google Chrome
 5. Play around with the site, cancel all your meetings, manage your minions, and think of money-making schemes!
+6. You can run tests by running "npm run test" in your terminal
 
 Project Status: 
 Satisfactorily completed with all tests passing. 
