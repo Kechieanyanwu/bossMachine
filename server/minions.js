@@ -26,7 +26,7 @@ minionRouter.param("minionId", (req, res, next, id) => { //Change this to just u
         err.status = 404;
         next(err);
     }
-})  
+});  
 
 minionRouter.use("/:minionId/work", workRouter);
 
@@ -45,7 +45,7 @@ minionRouter.post("/", (req, res, next) => {
     } else {
         res.status(400).send();
     }
-})
+});
 
 // GET /api/minions/:minionId to get a single minion by id.
 minionRouter.get("/:minionId", (req, res, next) => {
@@ -72,11 +72,11 @@ minionRouter.delete("/:minionId", (req, res, next) => {
     } else {
         res.status(400).send();
     }
-})
+});
 
 const errorHandler = (err, req, res, next) => {
     res.status(err.status).send(err.message);
-  }
+  };
   
 minionRouter.use(errorHandler);
 
