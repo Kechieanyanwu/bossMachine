@@ -32,7 +32,7 @@ workRouter.param("workId", (req, res, next, workId) => {
     } else {
         res.status(400).send("Invalid Minion ID"); //remove pt 2
     }
-})
+});
 
 // GET /api/minions/:minionId/work to get an array of all work for the specified minion.
 workRouter.get("/", (req, res, next) => {
@@ -62,7 +62,7 @@ workRouter.post("/", (req, res, next) => {
     } else {
         res.status(400).send();
     }
-})
+});
 
 
 // PUT /api/minions/:minionId/work/:workId to update a single work by id.
