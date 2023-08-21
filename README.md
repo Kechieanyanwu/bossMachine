@@ -5,13 +5,15 @@ This project is to create an entire API to serve information to a Boss Machine, 
 This project is from Codecademy's backend development path.
 
 Steps for running:
-1. Navigate to the project directory in your code editor
-2. Run "npm install" in your terminal to download the dependencies
-3. Run "npm run start" or "nodemon server.js"
-4. Open "index.html" in your web browser, preferably Google Chrome
-5. Play around with the site, cancel all your meetings, manage your minions, and think of money-making schemes!
-6. You can run tests by running "npm run test" in your terminal
-
+1. Begin by cloning this repository to your local folder using the command "Git clone [project link]".
+2. Next, open your code editor and navigate to the project directory.
+3. In your terminal, execute the command "npm install" to download all the necessary dependencies.
+4. To start the application, run either "npm run start" or "nodemon server.js" in your terminal.
+5. Open "index.html" in your web browser, preferably Google Chrome, to access the site.
+6. Explore the website's features, and feel free to immerse yourself in the experience. Manage your virtual empire, cancel all your meetings, and brainstorm your next big money-making schemes!
+7. If you'd like to run tests, simply enter "npm run test" in your terminal.
+   
+Enjoy the journey!
 Project Status: 
 Satisfactorily completed with all tests passing. 
 
